@@ -1,0 +1,19 @@
+{
+  "name": "hobby_server",
+  "version": "1.0.0",
+  "description": "This is demo Projects which will store data in json files",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "author": "B Madhava Reddy",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
