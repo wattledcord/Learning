@@ -42,8 +42,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="grid">
-          <TextField label="Employee Name" name="EmployeeName" onChange={this.handleInputChange} />
-          <TextField label="First Name" name="FirstName" onChange={this.handleInputChange} />
+          <TextField label="Employee Name" name="EmployeeName" required onChange={this.handleInputChange} />
+          <TextField label="First Name" name="FirstName" onChange={this.handleInputChange}  required /> 
           <TextField label="Last Name" name="LastName" onChange={this.handleInputChange} />
           <TextField label="Phone Number" name="PhoneNumber" onChange={this.handleInputChange} />
           <TextField label="Address" multiline rows={4} name="Address" onChange={this.handleInputChange} />
