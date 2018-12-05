@@ -11,7 +11,7 @@ class ViewEmployee extends Component {
             EmployeeName: '', FirstName: '', LastName: '', PhoneNumber: '', Address: '',
             Company: '',
             Designation: '', HighestEducation: '',
-            ID: '', snackopen: false, snackmsg: ''
+            ID: '', snackopen: false, snackmsg: '',snackvariant:'',txterr:false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmitClick = this.handleFormSubmitClick.bind(this);
@@ -26,6 +26,11 @@ class ViewEmployee extends Component {
         })
     }
     handleFormSubmitClick(event) {
+        if(this.state.ID==''){
+            this.setState({
+                snackmsg:'Enter valid data',snackvariant:'error',snackopen:true,txterr:true
+            })
+        }
         const url = `http://localhost:8080/employee/${this.state.ID}`;
         axios.get(url).then((response) => {
             if (response.data.EmployeeName)
@@ -43,7 +48,7 @@ class ViewEmployee extends Component {
                         PhoneNumber: '', Address: '',
                         Company: '', Designation: '',
                         HighestEducation: '',
-                        snackopen: true
+                        snackopen: true,snackvariant:'error'
                     })
                 else {
                     this.setState({
@@ -52,7 +57,7 @@ class ViewEmployee extends Component {
                         PhoneNumber: '', Address: '',
                         Company: '', Designation: '',
                         HighestEducation: '',
-                        snackopen: true
+                        snackopen: true,snackvariant:'info'
                     })
                 }
             }
@@ -66,7 +71,7 @@ class ViewEmployee extends Component {
         return (
             <div>
                 <form>
-                    <TextField label="Employee ID" name="ID" required onChange={this.handleInputChange} fullWidth variant="outlined" margin="normal" />
+                    <TextField error={this.state.txterr} label="Employee ID" name="ID" required onChange={this.handleInputChange} fullWidth variant="outlined" margin="normal" />
                     <Button onClick={this.handleFormSubmitClick} color="primary" variant="contained" fullWidth>Submit</Button>
                 </form>
                 <br />
@@ -119,7 +124,7 @@ class ViewEmployee extends Component {
                     <CloseIcon/>
                     </IconButton>]}                    
                 >
-                <MySnackbarContentWrapper message={this.state.snackmsg} onClose={this.handleSnackClose} variant="error">
+                <MySnackbarContentWrapper message={this.state.snackmsg} onClose={this.handleSnackClose} variant={this.state.snackvariant}>
 
                 </MySnackbarContentWrapper>
                 </Snackbar>

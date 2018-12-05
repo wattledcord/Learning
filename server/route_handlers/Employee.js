@@ -22,7 +22,7 @@ Employee.createEmployee = function createEmployee(req, res) {
         fs.writeFile(path.resolve(__dirname, './../data/employee.json'), JSON.stringify(employee), (writeerr) => {
             if (writeerr)
                 res.send(writeerr)
-            res.send("Data Added");
+            res.send("Data Added with ID :"+newemployee.employeeID);
         })
     })
 }
