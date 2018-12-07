@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>JS Drum Kit</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <section>
+    <div class="keys">
+      <div class="key" data-key="65">
+        <kbd>A</kbd>
+        <span class="sound">clap</span>
+      </div>
+      <div class="key" data-key="83">
+        <kbd>S</kbd>
+        <span class="sound">hihat</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">kick</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">openhat</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">boom</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">ride</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">snare</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">tom</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">tink</span>
+      </div>
+    </div>
+    <div class="keys">
+      <div data-key="81" class="key">
+        <kbd>Q</kbd>
+        <span class="sound">Basic_Rock_135</span>
+      </div>
+      <div data-key="87" class="key">
+        <kbd>W</kbd>
+        <span class="sound">Basic Rock Crash 1 3 5</span>
+      </div>
+      <div data-key="69" class="key">
+        <kbd>E</kbd>
+        <span class="sound">Basic Rock FillintoCra# 1 9A 6</span>
+      </div>
+      <div data-key="82" class="key">
+        <kbd>R</kbd>
+        <span class="sound">Basic Rock FillintoCrash 1 3 5</span>
+      </div>
+      <div data-key="84" class="key">
+        <kbd>T</kbd>
+        <span class="sound">boom</span>
+      </div>
+      <div data-key="89" class="key">
+        <kbd>Y</kbd>
+        <span class="sound">Big Thwack 1 20</span>
+      </div>
+      <div data-key="85" class="key">
+        <kbd>U</kbd>
+        <span class="sound">Boom Chuk 2 1 30</span>
+      </div>
+      <div data-key="73" class="key">
+        <kbd>I</kbd>
+        <span class="sound">Boom Chuk 1 30</span>
+      </div>
+
+      <div data-key="79" class="key">
+        <kbd>O</kbd>
+        <span class="sound">Cymbal Groove</span>
+      </div>
+      <div data-key="80" class="key">
+        <kbd>P</kbd>
+        <span class="sound">Driving Force 1 20</span>
+      </div>
+    </div>
+  </section>
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+  <audio data-key="81" src="sounds/Basic_Rock_135.wav"></audio>
+  <audio data-key="87" src="sounds/Basic_Rock_Crash_135.wav"></audio>
+  <audio data-key="69" src="sounds/Basic_Rock_FillintoCraE.wav"></audio>
+  <audio data-key="82" src="sounds/Basic_Rock_FillintoCrash_135.wav"></audio>
+  <audio data-key="84" src="sounds/boom.wav"></audio>
+  <audio data-key="89" src="sounds/Big_Thwack_120.wav"></audio>
+  <audio data-key="85" src="sounds/Boom_Chuk2_130.wav"></audio>
+  <audio data-key="73" src="sounds/Boom_Chuk_130.wav"></audio>
+  <audio data-key="79" src="sounds/Cymbal_Groove.wav"></audio>
+  <audio data-key="80" src="sounds/Driving_Force_120.wav"></audio>
+
+
+  <script>
+
+    function playsound(e) {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play();
+      key.classList.add('playing');
+    }
+    function removeTransition(e) {
+      if (e.propertyName !== "transform") return;
+      this.classList.remove('playing');
+    }
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    window.addEventListener('keydown', playsound);
+  </script>
+
+</body>
+
+</html>
