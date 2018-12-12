@@ -1,0 +1,46 @@
+<h1>Audio Files</h1>
+<ul class="list-group"></ul>
+{{#each files}}
+<li class="list-group-item" name="des" data-url={{this.url}}>{{this.description}}</li>
+{{/each}}
+</ul>
+<button type="button" class="btn btn-info" id="play">
+  <span class="glyphicon glyphicon-play"></span> Play
+</button>
+
+<button type="button" class="btn btn-info" id="pause">
+  <span class="glyphicon glyphicon-pause"></span> Pause
+</button>
+
+<audio id="player"></audio><br>
+<div class="progress">
+  <div id="seekbar" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+    <span class="sr-only">70% Complete</span>
+  </div>
+</div>
+<script>
+  const musicitems = document.querySelectorAll("li[name='des'");
+  const audioelemet = document.querySelector('audio');
+  musicitems.forEach((item) => { item.addEventListener('click', play) })
+  function play() {
+    this.classList.add('active');
+    audioelemet.setAttribute("src", this.dataset.url);
+    audioelemet.play();
+  }
+  $('#play').on('click', function () {
+    if (audioelemet.src)
+      document.getElementById('player').play();
+    else {
+      audioelemet.setAttribute("src", musicitems[0].dataset.url);
+      audioelemet.play();
+
+    }
+  });
+
+  $('#pause').on('click', function () {
+    document.getElementById('player').pause();
+  });
+  $('#player').on('timeupdate', function () {
+    $('#seekbar').attr("style", `width:${(this.currentTime / this.duration) * 100}%`);
+  });
+</script>

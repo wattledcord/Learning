@@ -1,0 +1,6 @@
+.dropdown-menu >li{
+  padding: 2px;
+}
+.dropdown-menu > li.divider{
+  padding: 0;
+}

@@ -1,0 +1,21 @@
+<h1>Files</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">displayName</th>
+      <th scope="col">createdDateTime</th>
+      <th scope="col">size</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each files}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.createdBy.user.displayName}}</td>
+        <td>{{eventDateTime createdDateTime}}</td>
+        <td>{{this.end.size}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
