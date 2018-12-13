@@ -1,95 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Node.js Graph Tutorial</title>
 
-    {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> --}}
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  </head>
+<head>
+  <title>OneDirve Streaming</title>
 
-  <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-<a href="/" class="navbar-brand">Node.js Graph Tutorial</a>
-   <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-        </button>
-        </div>
-        
-     
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="/" class="nav-link{{#if active.home}} active{{/if}}">Home</a>
-            </li>
-            {{#if user}}
-              <li  data-turbolinks="false">
-                <a href="/calendar" class="nav-link{{#if active.calendar}} active{{/if}}">Calendar</a>
-              </li>
-              <li  data-turbolinks="false">
-                <a href="/files" class="nav-link{{#if active.files}} active{{/if}}">files</a>
-              </li>
-              <li  data-turbolinks="false">
-                <a href="/audio" class="nav-link{{#if active.audio}} active{{/if}}">Audio</a>
-              </li>
-            {{/if}}
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li >
-              <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
-                <span class="glyphicon glyphicon-new-window"></span> Docs
-              </a>
-            </li>
-            {{#if user}}
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                  aria-expanded="false">
-                  {{#if user.avatar}}
-                    <img src="{{ user.avatar }}" class="glyphicon glyphicon-user" style="width: 32px;">
-                  {{else}}
-                    <i class="glyphicon glyphicon-user" style="width: 32px;"></i>
-                  {{/if}}
-                </a>
-                <ul class="dropdown-menu">
-                  <li >{{ user.displayName }}</li>
-                  <li >{{ user.email }}</li>
-                  <li class="divider"></li>
-                  <li><a href="/auth/signout"> Sign Out</a></li>
-                </ul>
-              </li>
-            {{else}}
-              <li>
-                <a href="/auth/signin"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
-              </li>
-            {{/if}}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main role="main" class="container">
-      {{#each error}}
-        <div class="alert alert-danger" role="alert">
-          <p class="mb-3">{{ this.message }}</p>
-          {{#if this.debug }}
-            <pre class="alert-pre border bg-light p-2"><code>{{ this.debug }}</code></pre>
+  {{!--
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous"> --}}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between ">
+    <div class="container">
+      <a href="/" class="navbar-brand"><i class="fas fa-headphones-alt" style="color:cyan"></i> OneDirve Stream</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="/" class="nav-link{{#if active.home}} active{{/if}}">Home</a>
+          </li>
+          {{#if user}}
+          <li data-turbolinks="false" class="nav-item">
+            <a href="/calendar" class="nav-link{{#if active.calendar}} active{{/if}}">Calendar</a>
+          </li>
+          <li data-turbolinks="false" class="nav-item">
+            <a href="/files" class="nav-link{{#if active.files}} active{{/if}}">files</a>
+          </li>
+          <li data-turbolinks="false" class="nav-item">
+            <a href="/audio" class="nav-link{{#if active.audio}} active{{/if}}">Audio</a>
+          </li>
           {{/if}}
-        </div>
-      {{/each}}
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
+              <span class="fas fa-info"></span> Docs
+            </a>
+          </li>
+          {{#if user}}
+          <li class="dropdown" class="nav-item">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              {{#if user.avatar}}
+              <img src="{{ user.avatar }}" class="glyphicon glyphicon-user" style="width: 32px;">
+              {{else}}
+              <i class="glyphicon glyphicon-user" style="width: 32px;"></i>
+              {{/if}}
+            </a>
+            <ul class="dropdown-menu">
+              <li>{{ user.displayName }}</li>
+              <li>{{ user.email }}</li>
+              <li class="divider"></li>
+              <li><a href="/auth/signout"> Sign Out</a></li>
+            </ul>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/signin"><span class="fas fa-sign-in-alt"></span> Sign In</a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main role="main" class="container">
+    {{#each error}}
+    <div class="alert alert-danger" role="alert">
+      <p class="mb-3">{{ this.message }}</p>
+      {{#if this.debug }}
+      <pre class="alert-pre border bg-light p-2"><code>{{ this.debug }}</code></pre>
+      {{/if}}
+    </div>
+    {{/each}}
 
-      {{{body}}}
-    </main>
-  </body>
+    {{{body}}}
+  </main>
+</body>
+
 </html>
