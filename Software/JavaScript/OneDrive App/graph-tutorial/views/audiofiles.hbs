@@ -1,29 +1,64 @@
 <h1>Audio Files</h1>
-<ul class="list-group"></ul>
-{{#each files}}
-<li class="list-group-item" name="des" data-url={{this.url}}>{{this.description}}</li>
-{{/each}}
-</ul>
-<button type="button" class="btn btn-info" id="play">
-  <span class="glyphicon glyphicon-play"></span> Play
-</button>
 
-<button type="button" class="btn btn-info" id="pause">
-  <span class="glyphicon glyphicon-pause"></span> Pause
-</button>
 
-<audio id="player"></audio><br>
-<div class="progress">
-  <div id="seekbar" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-    <span class="sr-only">70% Complete</span>
+<div class="card border-success">
+  <div class="card-header bg-transparent border-success" id="currentSong">
+    Song Name
+  </div>
+  <div class="card-body">
+    <img width="286px" height="180px" src="./../public/images/musicthumb.svg">
+    <h5 class="card-title"></h5>
+    <div class="btn-toolbar" role="toolbar">
+      <div class="btn-group btn-group-lg">
+        <button type="button" class="btn btn-outline-primary" id="prev">
+          <span class="fas fa-chevron-left"></span>
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="play">
+          <span class="fas fa-play"></span>
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="pause">
+          <span class="fas fa-pause"></span>
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="next">
+          <span class="fas fa-chevron-right"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer bg-transparent border-success">
+    <div class="progress" style="height:20px;">
+      <div id="seekbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+      </div>
+    </div>
   </div>
 </div>
+
+<audio id="player"></audio><br>
+<div class="progress" style="height:20px;width:100%;">
+  <input id="volume"  class="progress-bar progress-bar-striped progress-bar-animated w-75" role="progressbar" min="1" max="100" value="50"  type="range"/>  
+</div>
+<ul class="list-group"></ul>
+{{#each files}}
+<li class="list-group-item" name="des" data-url={{this.url}} data-song="{{this.description}}">{{this.description}}</li>
+{{/each}}
+</ul>
+
+
+
 <script>
   const musicitems = document.querySelectorAll("li[name='des'");
   const audioelemet = document.querySelector('audio');
+  const volume=document.getElementById('volume');
+  volume.addEventListener('input',()=>{
+console.log(volume.value);
+  },false);
   musicitems.forEach((item) => { item.addEventListener('click', play) })
   function play() {
+    musicitems.forEach((item) => item.classList.remove('active'));
     this.classList.add('active');
+    console.log(this.dataset);
+    $('#currentSong').text(this.dataset.song);
     audioelemet.setAttribute("src", this.dataset.url);
     audioelemet.play();
   }
@@ -31,6 +66,7 @@
     if (audioelemet.src)
       document.getElementById('player').play();
     else {
+      $('#currentSong').text(musicitems[0].dataset.song);
       audioelemet.setAttribute("src", musicitems[0].dataset.url);
       audioelemet.play();
 
@@ -43,4 +79,5 @@
   $('#player').on('timeupdate', function () {
     $('#seekbar').attr("style", `width:${(this.currentTime / this.duration) * 100}%`);
   });
+  
 </script>

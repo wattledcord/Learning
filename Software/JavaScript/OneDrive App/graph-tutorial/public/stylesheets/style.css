@@ -1,6 +1,9 @@
-.dropdown-menu >li{
-  padding: 2px;
+.navbar  .dropdown-toggle{
+  cursor: pointer;
 }
-.dropdown-menu > li.divider{
-  padding: 0;
+.navbar .dropdown-menu .card {
+  border: none;
+}
+.navbar .dropdown-menu .card-body {
+  padding: .35rem;
 }

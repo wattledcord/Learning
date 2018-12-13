@@ -3,6 +3,7 @@
 
 <head>
   <title>OneDirve Streaming</title>
+  <link rel="icon" href="../public/images/favicon.ico" type="image/x-icon">
 
   {{!--
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
@@ -20,11 +21,12 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+
 </head>
 
 <body>
   <div class="container">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between ">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark justify-content-between ">
       <a href="/" class="navbar-brand"><i class="fas fa-headphones-alt" style="color:cyan"></i> OneDirve Stream</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -38,45 +40,49 @@
           </li>
           {{#if user}}
           <li data-turbolinks="false" class="nav-item">
-            <a href="/calendar" class="nav-link{{#if active.calendar}} active{{/if}}">Calendar</a>
+            <a href="/calendar" class="nav-link{{#if active.calendar}} active{{/if}}"><i class="far fa-calendar-alt"></i> Calendar</a>
           </li>
           <li data-turbolinks="false" class="nav-item">
-            <a href="/files" class="nav-link{{#if active.files}} active{{/if}}">files</a>
+            <a href="/files" class="nav-link{{#if active.files}} active{{/if}}"><i class="far fa-file-alt"></i> files</a>
           </li>
           <li data-turbolinks="false" class="nav-item">
-            <a href="/audio" class="nav-link{{#if active.audio}} active{{/if}}">Audio</a>
+            <a href="/audio" class="nav-link{{#if active.audio}} active{{/if}}"><i class="fas fa-music"></i> Audio</a>
           </li>
           {{/if}}
         </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+        <div class="navbar-nav ml-auto">
+          <div class="nav-item">
             <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
               <span class="fas fa-info"></span> Docs
             </a>
-          </li>
+          </div>
           {{#if user}}
-          <li class="dropdown" class="nav-item">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown nav-item">
+            <div class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+              aria-expanded="false">
               {{#if user.avatar}}
-              <img src="{{ user.avatar }}" class="glyphicon glyphicon-user" style="width: 32px;">
+              <img src="{{ user.avatar }}" class="far fa-user">
               {{else}}
-              <i class="glyphicon glyphicon-user" style="width: 32px;"></i>
+              <div class="far fa-user"></div>
               {{/if}}
-            </a>
-            <ul class="dropdown-menu">
-              <li>{{ user.displayName }}</li>
-              <li>{{ user.email }}</li>
-              <li class="divider"></li>
-              <li><a href="/auth/signout"> Sign Out</a></li>
-            </ul>
-          </li>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="card">              
+              <div class="card-body">
+                <h5 class="card-title">{{ user.displayName }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ user.email }}</h6>
+                <a class="card-link" href="/auth/signout"> Sign Out</a>
+              </div>
+              </div>
+            </div>
+          </div>
           {{else}}
-          <li class="nav-item">
+          <div class="nav-item">
             <a class="nav-link" href="/auth/signin"><span class="fas fa-sign-in-alt"></span> Sign In</a>
-          </li>
+          </div>
           {{/if}}
-        </ul>
-      </div>
+          </ul>
+        </div>
     </nav>
   </div>
   <main role="main" class="container">
