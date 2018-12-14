@@ -33,11 +33,9 @@
     </div>
   </div>
 </div>
+<input type="range"  min="0" max="100" value="15" id="volume">
 
 <audio id="player"></audio><br>
-<div class="progress" style="height:20px;width:100%;">
-  <input id="volume"  class="progress-bar progress-bar-striped progress-bar-animated w-75" role="progressbar" min="1" max="100" value="50"  type="range"/>  
-</div>
 <ul class="list-group"></ul>
 {{#each files}}
 <li class="list-group-item" name="des" data-url={{this.url}} data-song="{{this.description}}">{{this.description}}</li>
@@ -46,7 +44,7 @@
 
 
 
-<script>
+<script>  
   const musicitems = document.querySelectorAll("li[name='des'");
   const audioelemet = document.querySelector('audio');
   const volume=document.getElementById('volume');
@@ -79,5 +77,15 @@ console.log(volume.value);
   $('#player').on('timeupdate', function () {
     $('#seekbar').attr("style", `width:${(this.currentTime / this.duration) * 100}%`);
   });
+  $('#volume').change(function () {
+    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+    
+    $(this).css('background-image',
+                '-webkit-gradient(linear, left top, right top, '
+                + 'color-stop(' + val + ', #94A14E), '
+                + 'color-stop(' + val + ', #C5C5C5)'
+                + ')'
+                );
+});
   
 </script>
