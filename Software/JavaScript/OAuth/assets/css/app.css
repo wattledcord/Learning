@@ -1,0 +1,10 @@
+.navbar  .dropdown-toggle{
+    cursor: pointer;
+  }
+  .navbar .dropdown-menu .card {
+    border: none;
+  }
+  .navbar .dropdown-menu .card-body {
+    padding: .35rem;
+  }
+  
